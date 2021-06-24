@@ -1,5 +1,8 @@
 container:
   image: ubuntu:focal
+  cpu: 0.0625
+  memory: 20M
 lint_task:
+  use_compute_credits: true
   only_if: $CIRRUS_BASE_BRANCH == 'main'
   lint_script: ./contrib/files-touched-check
