@@ -1,0 +1,5 @@
+container:
+  image: ubuntu:focal
+lint_task:
+  only_if: $CIRRUS_BASE_BRANCH == 'main'
+  lint_script: ./contrib/files-touched-check

@@ -1,0 +1,2 @@
+*.SHA256SUMS -text -diff
+*.SHA256SUMS.asc -text -diff
