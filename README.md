@@ -1,6 +1,3 @@
-This repository contains Guix signatures for Bitcoin.
-It should be updated on each release.
+This repository contains Guix attestations for releases of Bitcoin Core.
 
-## How to Make and Submit Guix Sigs
-
-TODO: add instructions here
+See https://github.com/bitcoin/bitcoin/blob/master/doc/release-process.md#building on how to build the release with Guix and create an attestation.
