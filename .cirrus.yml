@@ -2,4 +2,5 @@ container:
   image: ubuntu:focal
 lint_task:
   only_if: $CIRRUS_BASE_BRANCH == 'main'
+  setup_script: apt-get update && apt-get install -y git
   lint_script: ./contrib/files-touched-check
