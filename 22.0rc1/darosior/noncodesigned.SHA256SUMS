@@ -1,0 +1,13 @@
+d59c9f42877894a2d304fc447f7d92b1b68021015a34b7f7fe63bfbc3ece97d4  aarch64-linux-gnu/bitcoin-22.0rc1-aarch64-linux-gnu-debug.tar.gz
+2830280518388d23292bbfc8e280942bcc2decfd24d5ce3201c945a0d8c3fab8  aarch64-linux-gnu/bitcoin-22.0rc1-aarch64-linux-gnu.tar.gz
+1d5b16b5152333b41ff055183d260185a3162eca1468496607cbb4a7ab968fb2  arm-linux-gnueabihf/bitcoin-22.0rc1-arm-linux-gnueabihf-debug.tar.gz
+461d46b06f92148f1ddb3cae45c051a424c61903b3e3a7665c5afcbd0091fb34  arm-linux-gnueabihf/bitcoin-22.0rc1-arm-linux-gnueabihf.tar.gz
+5ff3a8c6e646755ba60ec29db3a5994b4173509e637a250334c61dd9689cb3b6  dist-archive/bitcoin-22.0rc1.tar.gz
+90b0f5d5e71aa2d029d04e35c7f6f45bfa924e4e78712cb0332f52a64ca9f826  powerpc64-linux-gnu/bitcoin-22.0rc1-powerpc64-linux-gnu-debug.tar.gz
+d5400fb87db9365dc4c5fd54b44f989b54f5a400157d87afa86ee0cadd939f86  powerpc64-linux-gnu/bitcoin-22.0rc1-powerpc64-linux-gnu.tar.gz
+712d77023a586ca0dc303253a1e3f379cbd68982ee27f96cbd11a7202529d013  powerpc64le-linux-gnu/bitcoin-22.0rc1-powerpc64le-linux-gnu-debug.tar.gz
+bfaf8f4071a78c16552b1b7ccdfb6e73a3103c79515b3414bd57dcdedbdb7c38  powerpc64le-linux-gnu/bitcoin-22.0rc1-powerpc64le-linux-gnu.tar.gz
+0517c9ad2b124a3dfb0dbd03822d25f5f50feec4624ecbcf4b5a596586889276  riscv64-linux-gnu/bitcoin-22.0rc1-riscv64-linux-gnu-debug.tar.gz
+a5ce8cb2a78d70530e1793348c46d9568b1c4a92a61cf15728b96d4c0eb95f84  riscv64-linux-gnu/bitcoin-22.0rc1-riscv64-linux-gnu.tar.gz
+e21d5c9ff6c4ded3a7cd44d87f58212ae6c927f317185a5d09a166c15466d490  x86_64-linux-gnu/bitcoin-22.0rc1-x86_64-linux-gnu-debug.tar.gz
+b2c804336212f67c3f09c89c786c9f3d8ac3ff5c7c901ca3e7ac4b9aaee5fbfa  x86_64-linux-gnu/bitcoin-22.0rc1-x86_64-linux-gnu.tar.gz
