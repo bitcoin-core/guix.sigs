@@ -10,6 +10,7 @@ f726cbf870cea5f9e00ceaf719ed89081db1bc3a4e4ec6c1628f0019151af56c  powerpc64-linu
 20c79e37f0c773f1160f18ef45c3de920c195592f9672d212643be6bc2a92f30  powerpc64le-linux-gnu/bitcoin-22.0rc1-powerpc64le-linux-gnu.tar.gz
 5037f4c169befd1b5cbf1eef84b9b08d73baca65f2e88e2879e5064d83b08e53  riscv64-linux-gnu/bitcoin-22.0rc1-riscv64-linux-gnu-debug.tar.gz
 242958a12626910ec1c8ef9806b57dd9254a572c24c19bd03a09565305ee7b08  riscv64-linux-gnu/bitcoin-22.0rc1-riscv64-linux-gnu.tar.gz
+dfb602213a77835e719c646d54eab8e32d1346a1559e6337ed739427255affe6  x86_64-apple-darwin18-codesigned/bitcoin-22.0rc1-osx-signed.dmg
 35cf65640915cbe7f25699fe31c8f07ba3ccabb43d5586a585381d234ea2cc0f  x86_64-apple-darwin18/bitcoin-22.0rc1-osx-unsigned.dmg
 8f1260c53f3879a176066231eb61fc598bd28ddf4afe9cdd1c10836b95b8a89e  x86_64-apple-darwin18/bitcoin-22.0rc1-osx-unsigned.tar.gz
 a01049fd1992b1ed5561cacc04e3f227641561c64338b8775d14d82d20f444be  x86_64-apple-darwin18/bitcoin-22.0rc1-osx64.tar.gz
