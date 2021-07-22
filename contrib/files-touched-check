@@ -7,8 +7,8 @@ while read -r status name; do
 
     case "$name" in
         README.md) continue ;;
+        .cirrus.yml) continue ;;
         contrib/*) continue ;;
-        21.99-guixtest1/*) continue ;;  # guixtest1 used a different hierarchy
     esac
     
     if [ "$status" != "A" ]; then
