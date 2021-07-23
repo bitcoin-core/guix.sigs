@@ -2,8 +2,7 @@
 6af7e6291feed3e80adfbb3d265ba3044b104f83a8364a708aac8b11f2823c7d  aarch64-linux-gnu/bitcoin-22.0rc1-aarch64-linux-gnu.tar.gz
 ed88a382b98587f6cefcddc695f12c7af5e41134065c51e8b93229beac41fde1  arm-linux-gnueabihf/bitcoin-22.0rc1-arm-linux-gnueabihf-debug.tar.gz
 db278043a7f2d7125139965707370d953b7d350fb131fecad06e96c82587a820  arm-linux-gnueabihf/bitcoin-22.0rc1-arm-linux-gnueabihf.tar.gz
-2c592cda367ba4be4714f7eb988ce1bb69128a19772339f86940b6c4a317bb51  dist-archive/bitcoin-22.0rc1-codesignatures-2ce133bf11e0.tar.gz
-1affe7e49462b6a48c46167cb182594d4cbd54ff61486e3daef75618dbc85df9  dist-archive/bitcoin-22.0rc1-codesignatures-8a51da74577c.tar.gz
+1affe7e49462b6a48c46167cb182594d4cbd54ff61486e3daef75618dbc85df9  dist-archive/bitcoin-22.0rc1-codesignatures-22.0rc1.tar.gz
 5ff3a8c6e646755ba60ec29db3a5994b4173509e637a250334c61dd9689cb3b6  dist-archive/bitcoin-22.0rc1.tar.gz
 f726cbf870cea5f9e00ceaf719ed89081db1bc3a4e4ec6c1628f0019151af56c  powerpc64-linux-gnu/bitcoin-22.0rc1-powerpc64-linux-gnu-debug.tar.gz
 0d57e541ca1828e8dcd970233fe4a8539da0d0f64bd313388a6c61da9d08521d  powerpc64-linux-gnu/bitcoin-22.0rc1-powerpc64-linux-gnu.tar.gz
