@@ -1,6 +1,15 @@
 container:
   image: ubuntu:focal
+  cpu: 0.5
+  memory: 256M
 lint_task:
+  use_compute_credits: true
   only_if: $CIRRUS_BASE_BRANCH == 'main'
+  stateful: false  # https://cirrus-ci.org/guide/writing-tasks/#stateful-tasks
   setup_script: apt-get update && apt-get install -y git
+  merge_base_script:
+    - git fetch $CIRRUS_REPO_CLONE_URL $CIRRUS_BASE_BRANCH
+    - git config --global user.email "ci@ci.ci"
+    - git config --global user.name "ci"
+    - git merge FETCH_HEAD  # Merge base to detect silent merge conflicts
   lint_script: ./contrib/files-touched-check
