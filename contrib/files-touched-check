@@ -3,32 +3,35 @@ export LC_ALL=C
 set -e -o pipefail
 export TZ=UTC
 
-while read -r status name; do
+git diff --no-commit-id --name-status -r "${1:-${CIRRUS_BASE_SHA}...HEAD}" \
+    | {
+    while read -r status name; do
 
-    case "$name" in
-        README.md) continue ;;
-        .cirrus.yml) continue ;;
-        contrib/*) continue ;;
-    esac
-    
-    if [ "$status" != "A" ]; then
-        echo "ERR: File status is not 'A' (for add): '$status'"
-        exit 1
-    fi
+       case "$name" in
+           README.md) continue ;;
+           .cirrus.yml) continue ;;
+           contrib/*) continue ;;
+       esac
 
-    if [[ $name =~ ^[^/]+/[^/]+/[^/]+.SHA256SUMS(|.asc)$ ]]; then
-        if [ -z "$last_prefix" ]; then
-            last_prefix="$(dirname "$name")"
-            continue
-        elif [ "$last_prefix" = "$(dirname "$name")" ]; then
-            continue
-        else
-            echo "ERR: Added files need to be under the same prefix: '${last_prefix}'"
-            exit 1
-        fi
-    else
-        echo "ERR: Added unknown file '$name'"
-        exit 1
-    fi
+       if [ "$status" != "A" ]; then
+           echo "ERR: File status is not 'A' (for add): '$status'"
+           exit 1
+       fi
 
-done < <(git diff --no-commit-id --name-status -r "${1:-${CIRRUS_BASE_SHA}...HEAD}")
+       if [[ $name =~ ^[^/]+/[^/]+/[^/]+.SHA256SUMS(|.asc)$ ]]; then
+           if [ -z "$last_prefix" ]; then
+               last_prefix="$(dirname "$name")"
+               continue
+           elif [ "$last_prefix" = "$(dirname "$name")" ]; then
+               continue
+           else
+               echo "ERR: Added files need to be under the same prefix: '${last_prefix}'"
+               exit 1
+           fi
+       else
+           echo "ERR: Added unknown file '$name'"
+           exit 1
+       fi
+
+    done
+    }
