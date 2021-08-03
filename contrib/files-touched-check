@@ -26,6 +26,9 @@ while read -r status name; do
             echo "ERR: Added files need to be under the same prefix: '${last_prefix}'"
             exit 1
         fi
+        if [[ "$name" == *.SHA256SUMS ]]; then
+            ./contrib/detached-sig-check < "$name"
+        fi
     else
         echo "ERR: Added unknown file '$name'"
         exit 1

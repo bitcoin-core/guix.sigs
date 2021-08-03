@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import sys
+
+
+def main():
+    """Checks that stdin has CRLF line endings and no EOF line endings
+
+    Exits with 1 status code otherwise
+
+    This is to make sure that .SHA256SUMS files can be concatenated with their
+    detached signature counterparts to create a signature file that gpg will
+    accept. See ./contrib/guix/guix-attest in the bitcoin repo for more
+    details.
+    """
+    crlf = "\r\n"
+
+    everything = sys.stdin.read()
+    if everything.endswith(crlf):
+        sys.exit(1)
+
+    everything_but_crlf = everything.replace(crlf, "")
+    for char in crlf:
+        if char in everything_but_crlf:
+            sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
