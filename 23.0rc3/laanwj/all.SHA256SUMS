@@ -2,6 +2,7 @@
 0640d892bd02315d49b6144429eee3837948c9166b8fab64a97cefe3417de93c  bitcoin-23.0rc3-aarch64-linux-gnu.tar.gz
 313474cc5fb51160829678518b45c2ecb8f9ee36b81efa93d9378d54edd5b0e2  bitcoin-23.0rc3-arm-linux-gnueabihf-debug.tar.gz
 17e03a042777ace6be0b24f90c03da5fa6134eeb18b95531cc8c76dcc69005d6  bitcoin-23.0rc3-arm-linux-gnueabihf.tar.gz
+69c7fae57b43fc871a1b1a5451326f4584ead780e3f2c3119e4b699cbb1f94c8  bitcoin-23.0rc3-arm64-apple-darwin.dmg
 fd860249da1920635edcfbef69e498abbc0749c6497d24542ef1df18edce6258  bitcoin-23.0rc3-arm64-apple-darwin-unsigned.dmg
 d2de73ca591ab10651f18ab7bc9e9345a825009bfc7cf422f7201d3d9982cf8e  bitcoin-23.0rc3-arm64-apple-darwin-unsigned.tar.gz
 2a939a26cd26435494943ded9e8b53eeec9d240a1eac013b8ef81246156f4567  bitcoin-23.0rc3-arm64-apple-darwin.tar.gz
@@ -13,6 +14,7 @@ b3ad58f2440ecac3e01516d45822770d17b6360ea74d659a454b29e6cd9fd27d  bitcoin-23.0rc
 4bbda2e86b5bca767b682c9ac90bdce62345d3687af39afd48950a439c43adcc  bitcoin-23.0rc3-powerpc64le-linux-gnu.tar.gz
 ace2515cff8d1effb57f14b8b1dcc183d5bcaf01bd12ebabe564cd8b8bb43507  bitcoin-23.0rc3-riscv64-linux-gnu-debug.tar.gz
 e07223f0371b7d9784475c4d873caaaa5d508425b37a7522192a5a87b7b32d93  bitcoin-23.0rc3-riscv64-linux-gnu.tar.gz
+ff85aae9184a412ab3bc2dbd3d5ffb578dfbe95820f8179d0a2667f55d935508  bitcoin-23.0rc3-x86_64-apple-darwin.dmg
 74b0983604f34f8b2c2c5dd5a907590d4f563d795769909014bea38353183332  bitcoin-23.0rc3-x86_64-apple-darwin-unsigned.dmg
 63c8cf07a62ca05c56c97138d1593045b5292c69cbd314ce056d301a8d3008d3  bitcoin-23.0rc3-x86_64-apple-darwin-unsigned.tar.gz
 5fb3d6edd3434d5897904d607c6002034f6a8822beb4b1487230cfac4b73c1f2  bitcoin-23.0rc3-x86_64-apple-darwin.tar.gz
