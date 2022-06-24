@@ -3,5 +3,15 @@
 6e2107276f75505b0381e0d634a969e451136891fdb74c0ce75e0732cd3daca0  namecoin-nc22.0-arm-linux-gnueabihf-debug.tar.gz
 854de66e528a9cc2c7fd150fd0a9951762f762f2298c120334b5241d0d7073e2  namecoin-nc22.0-arm-linux-gnueabihf.tar.gz
 114afa7c4520ed07df44b9da6a512018a07f9494e975544d56ec35c3f5ea9224  namecoin-nc22.0.tar.gz
+5edd21c5c7b1cca2137355f6f2c541df49f87076fedea59dd853896a6622a9d8  namecoin-nc22.0-powerpc64-linux-gnu-debug.tar.gz
+dc12bd6c6aa8c690deb1baa39869324fae94f4fe8654d6eb1ac6be42b00dd7b1  namecoin-nc22.0-powerpc64-linux-gnu.tar.gz
+638f098d412be8720c726377fbc75c895c056089e8286eb5bda0af34424bc34a  namecoin-nc22.0-powerpc64le-linux-gnu-debug.tar.gz
+1e17e798d74b6f29ad06fa9df147d0f65617cb7186dbff51c8ae24e00fa189d5  namecoin-nc22.0-powerpc64le-linux-gnu.tar.gz
+ca13e1a35b74ba39b6eb6af93364f1a6a49c0c45caf1c60307a88828d7af6651  namecoin-nc22.0-riscv64-linux-gnu-debug.tar.gz
+c14db6cce840ca0f9a0b6505bdefe275419b10b514ad3970863fe15295378e48  namecoin-nc22.0-riscv64-linux-gnu.tar.gz
 410cc11a64699461acd01592309a9c3dfa8b6ee9236a98433ebf5524e0631b74  namecoin-nc22.0-x86_64-linux-gnu-debug.tar.gz
 e751a698076002b66b56f6c28e09d87b964b4b6087ecc949ebe6f46166aa7133  namecoin-nc22.0-x86_64-linux-gnu.tar.gz
+fbc82b1e0546c89b784d92477f79709f0ee54e35604f30d779ae82860d3ce0b8  namecoin-nc22.0-win-unsigned.tar.gz
+6913fe152604ed54db28c85fef01eebaa0e0a6433b61100214543314f5adc0d8  namecoin-nc22.0-win64-debug.zip
+08d27ea2b0ce9f377edbd966f4290d4080306bf07396d3f4132ebfb44d5509a6  namecoin-nc22.0-win64-setup-unsigned.exe
+048b64b4ddbc31a11ecb9a6ea13ae8520ea857c4aeabdeb57ab791489e683f9e  namecoin-nc22.0-win64.zip
