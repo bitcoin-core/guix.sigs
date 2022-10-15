@@ -1,0 +1,13 @@
+9a870ce07e1074cb1a3256a10667569250d60e8318e537b0a7310c6226589b12  bitcoin-24.0rc2-aarch64-linux-gnu-debug.tar.gz
+96013398378c1769f81571c6afa005180274928288f8b042f27e8586864e3d58  bitcoin-24.0rc2-aarch64-linux-gnu.tar.gz
+4dd686272cc270d83ce6d2bf86744295396914d92d11669164a2b95c19c735ad  bitcoin-24.0rc2-arm-linux-gnueabihf-debug.tar.gz
+8a260e924027e669e6dafc1a42094080a65999aeb105d55a2e7b5ab3e733bccf  bitcoin-24.0rc2-arm-linux-gnueabihf.tar.gz
+644ca02cbb6adb4ee6ef71deaa40b614981089f30aeaca9f618d3d469d09a87b  bitcoin-24.0rc2.tar.gz
+edd61cac7a17f2588b056f1154f227975d776a0f9ccdc8bf9ade3fb2846decc2  bitcoin-24.0rc2-powerpc64-linux-gnu-debug.tar.gz
+1ca3bd84695b2a4b20955bc1396f3e24a6c8482c514aca533985be64338d9729  bitcoin-24.0rc2-powerpc64-linux-gnu.tar.gz
+c1f71aaf5aaceb78ecd58fdb9d61237311342780c58de592057b66432488384b  bitcoin-24.0rc2-powerpc64le-linux-gnu-debug.tar.gz
+cf937b090360a65b5faa5fd8eaad806514be57995462cd20424f21db25ce3463  bitcoin-24.0rc2-powerpc64le-linux-gnu.tar.gz
+63201f3b93997d00d98c671dd337a8123d5018401e0f4830c23d62aa079ef7da  bitcoin-24.0rc2-riscv64-linux-gnu-debug.tar.gz
+58c3f4535ebc75196f16d4bd3d4e0216e796c41753a135fc97e75db770b1ffd4  bitcoin-24.0rc2-riscv64-linux-gnu.tar.gz
+8165625e67a8b52217b802443891b832b0e80213925645f6ee5e391c1f4c17a4  bitcoin-24.0rc2-x86_64-linux-gnu-debug.tar.gz
+e387d0ffc6b30ff32c97db43a1a39d26323bc7dc60c87cf6fea71776dd28ea81  bitcoin-24.0rc2-x86_64-linux-gnu.tar.gz
