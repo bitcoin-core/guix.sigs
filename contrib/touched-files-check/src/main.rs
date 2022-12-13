@@ -26,9 +26,6 @@ fn check(touched_files: &str) -> Result<(), String> {
             return Err(format!("Added unknown file '{file}'"));
         }
     }
-    if attestations.len() > 1 {
-        return Err(format!("Added files need to be under the same path prefix"));
-    }
     for (path, asc) in attestations {
         if asc.len() != 2 {
             return Err(format!(
