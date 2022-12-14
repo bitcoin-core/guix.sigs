@@ -20,14 +20,11 @@ fn check(touched_files: &str) -> Result<(), String> {
         if let Some(path) = path_regex.captures(file) {
             attestations
                 .entry(path.get(1).unwrap().as_str())
-                .or_insert(Vec::new())
+                .or_insert_with(Vec::new)
                 .push(path.get(2).unwrap().as_str());
         } else {
             return Err(format!("Added unknown file '{file}'"));
         }
-    }
-    if attestations.len() > 1 {
-        return Err(format!("Added files need to be under the same path prefix"));
     }
     for (path, asc) in attestations {
         if asc.len() != 2 {
@@ -38,6 +35,7 @@ fn check(touched_files: &str) -> Result<(), String> {
     }
     Ok(())
 }
+
 fn main() {
     let diff_range = std::env::args()
         .nth(1)
@@ -53,7 +51,7 @@ fn main() {
 
 #[test]
 fn test_check() {
-    assert!(check("M README.md").is_ok());
+    assert_eq!(check("M README.md"), Ok(()));
     assert_eq!(
         check("B 22.0/user/all.SHA256SUMS").unwrap_err(),
         "File status is not 'A' (for add): 'B' '22.0/user/all.SHA256SUMS'"
@@ -66,5 +64,8 @@ fn test_check() {
         check("A 22.0/user/all.SHA256SUMS").unwrap_err(),
         "Missing SHA256SUMS.asc or SHA256SUMS file in 22.0/user/all.SHA256SUMS"
     );
-    assert!(check("A 22.0/user/all.SHA256SUMS\nA 22.0/user/all.SHA256SUMS.asc").is_ok());
+    assert_eq!(
+        check("A 22.0/user/all.SHA256SUMS\nA 22.0/user/all.SHA256SUMS.asc"),
+        Ok(())
+    );
 }
