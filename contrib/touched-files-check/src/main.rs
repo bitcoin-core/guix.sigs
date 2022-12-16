@@ -1,5 +1,5 @@
 fn check(touched_files: &str) -> Result<(), String> {
-    let path_regex = regex::Regex::new("^([^/]+/[^/]+/[^/]+.SHA256SUMS)(|.asc)$").unwrap();
+    let attestation_regex = regex::Regex::new("^([^/]+/[^/]+/[^/]+.SHA256SUMS)(|.asc)$").unwrap();
     let mut attestations = std::collections::HashMap::new();
     for line in touched_files.lines() {
         let (status, file) = {
@@ -12,16 +12,16 @@ fn check(touched_files: &str) -> Result<(), String> {
         {
             continue;
         }
-        if status != "A" {
-            return Err(format!(
-                "File status is not 'A' (for add): '{status}' '{file}'"
-            ));
-        }
-        if let Some(path) = path_regex.captures(file) {
+        if let Some(path) = attestation_regex.captures(file) {
             attestations
                 .entry(path.get(1).unwrap().as_str())
                 .or_insert_with(Vec::new)
                 .push(path.get(2).unwrap().as_str());
+            if status != "A" {
+                return Err(format!(
+                    "File status for attestation is not 'A' (for add): '{status}' '{file}'"
+                ));
+            }
         } else {
             return Err(format!("Added unknown file '{file}'"));
         }
@@ -54,7 +54,7 @@ fn test_check() {
     assert_eq!(check("M README.md"), Ok(()));
     assert_eq!(
         check("B 22.0/user/all.SHA256SUMS").unwrap_err(),
-        "File status is not 'A' (for add): 'B' '22.0/user/all.SHA256SUMS'"
+        "File status for attestation is not 'A' (for add): 'B' '22.0/user/all.SHA256SUMS'"
     );
     assert_eq!(
         check("A 22.0/user/all.SHA256SUMS\nA 22.0/user/all.SHA256SUMS.ask").unwrap_err(),
