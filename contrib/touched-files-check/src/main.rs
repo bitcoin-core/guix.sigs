@@ -1,6 +1,8 @@
 fn check(touched_files: &str) -> Result<(), String> {
     let attestation_regex = regex::Regex::new("^([^/]+/[^/]+/[^/]+.SHA256SUMS)(|.asc)$").unwrap();
     let mut attestations = std::collections::HashMap::new();
+    let builder_key_regex = regex::Regex::new("^(builder-keys/[^/]+.gpg)$").unwrap();
+    let mut builder_keys = Vec::new();
     for line in touched_files.lines() {
         let (status, file) = {
             let mut l = line.split_whitespace();
@@ -20,6 +22,13 @@ fn check(touched_files: &str) -> Result<(), String> {
             if status != "A" {
                 return Err(format!(
                     "File status for attestation is not 'A' (for add): '{status}' '{file}'"
+                ));
+            }
+        } else if let Some(path) = builder_key_regex.captures(file) {
+            builder_keys.push(path.get(1).unwrap().as_str());
+            if status != "A" && status != "M" {
+                return Err(format!(
+                    "File status for builder key is not 'A' (for add) or 'M' (for modified): '{status}' '{file}'"
                 ));
             }
         } else {
@@ -68,4 +77,9 @@ fn test_check() {
         check("A 22.0/user/all.SHA256SUMS\nA 22.0/user/all.SHA256SUMS.asc"),
         Ok(())
     );
+    assert_eq!(
+        check("B builder-keys/user.gpg").unwrap_err(),
+        "File status for builder key is not 'A' (for add) or 'M' (for modified): 'B' 'builder-keys/user.gpg'",
+    );
+    assert_eq!(check("M builder-keys/user.gpg"), Ok(()));
 }
