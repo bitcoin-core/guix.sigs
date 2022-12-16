@@ -8,12 +8,27 @@ fn check_attestations(atts: Vec<&str>, mut keys: HashSet<&str>) -> Result<(), St
         keys.remove(&builder_key as &str);
         let builder_key_file = std::fs::File::open(&builder_key)
             .map_err(|e| format!("Builder key not found for attestation. Attestation: '{att}', Key: '{builder_key}', Error: '{e}'"))?;
-        ctx.import(builder_key_file)
+        let import_result = ctx
+            .import(builder_key_file)
             .map_err(|e| format!("Builder key not imported. Key: '{builder_key}', Error: '{e}'"))?;
+        println!("{:?}", import_result);
+        if import_result.considered() != 1 || import_result.not_imported() > 0 {
+            return Err(format!(
+                "Too many or too few builder keys considered for import. Key: '{builder_key}', Considered: {c}, Not imported: {n}",c=import_result.considered(),n=import_result.not_imported()
+            ));
+        }
         let sig = std::fs::File::open(format!("{att}.asc")).unwrap();
         let msg = std::fs::File::open(att).unwrap();
-        ctx.verify_detached(sig, msg)
+        let verify_result= ctx.verify_detached(sig, msg)
             .map_err(|e| format!("Signature does not verify. Attestation: '{att}', Key: '{builder_key}', Error: '{e}'"))?;
+        println!("{:?}", verify_result);
+        let sigs = verify_result.signatures().collect::<Vec<_>>();
+        if sigs.len() != 1 {
+            return Err(format!("Too many or too few signatures. Attestation: '{att}', Key: '{builder_key}, Sigs len: {l}",l=sigs.len()));
+        }
+        sigs.first().unwrap().status().map_err(|e| {
+            format!("Signature error. Attestation: '{att}', Key: '{builder_key}', Error: '{e}'")
+        })?;
     }
     if !keys.is_empty() {
         return Err(format!(
@@ -34,6 +49,7 @@ fn check(touched_files: &str) -> Result<(Vec<&str>, HashSet<&str>), String> {
             let mut l = line.split_whitespace();
             (l.next().unwrap(), l.next().unwrap())
         };
+        println!("Touched file: {status} {file}");
         if ["README.md", ".cirrus.yml", "contrib/"]
             .iter()
             .any(|ignore| file.starts_with(ignore))
