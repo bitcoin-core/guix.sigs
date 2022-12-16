@@ -6,7 +6,7 @@ lint_task:
   use_compute_credits: true
   only_if: $CIRRUS_BASE_BRANCH == 'main'
   stateful: false  # https://cirrus-ci.org/guide/writing-tasks/#stateful-tasks
-  setup_script: apt-get update && apt-get install -y git
+  setup_script: apt-get update && apt-get install -y git libgpgme-dev
   merge_base_script:
     - git fetch $CIRRUS_REPO_CLONE_URL "pull/${CIRRUS_PR}/merge"
     - git checkout FETCH_HEAD  # Derive full diff based on merge commit, see lint_script

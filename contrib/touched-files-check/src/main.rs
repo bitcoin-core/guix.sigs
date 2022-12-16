@@ -1,5 +1,29 @@
 use std::collections::{HashMap, HashSet};
 
+fn check_attestations(atts: Vec<&str>, mut keys: HashSet<&str>) -> Result<(), String> {
+    for att in atts {
+        let mut ctx = gpgme::Context::from_protocol(gpgme::Protocol::OpenPgp).expect("gpgme error");
+        let builder = att.split('/').nth(1).unwrap();
+        let builder_key = format!("builder-keys/{builder}.gpg");
+        keys.remove(&builder_key as &str);
+        let builder_key_file = std::fs::File::open(&builder_key)
+            .map_err(|e| format!("Builder key not found for attestation. Attestation: '{att}', Key: '{builder_key}', Error: '{e}'"))?;
+        ctx.import(builder_key_file)
+            .map_err(|e| format!("Builder key not imported. Key: '{builder_key}', Error: '{e}'"))?;
+        let sig = std::fs::File::open(format!("{att}.asc")).unwrap();
+        let msg = std::fs::File::open(att).unwrap();
+        ctx.verify_detached(sig, msg)
+            .map_err(|e| format!("Signature does not verify. Attestation: '{att}', Key: '{builder_key}', Error: '{e}'"))?;
+    }
+    if !keys.is_empty() {
+        return Err(format!(
+            "Added builder keys without new attestation. Extra keys: '{keys}'",
+            keys = keys.into_iter().collect::<Vec<_>>().join(", ")
+        ));
+    }
+    Ok(())
+}
+
 fn check(touched_files: &str) -> Result<(Vec<&str>, HashSet<&str>), String> {
     let attestation_regex = regex::Regex::new("^([^/]+/[^/]+/[^/]+.SHA256SUMS)(|.asc)$").unwrap();
     let mut attestations = HashMap::new();
@@ -57,7 +81,8 @@ fn main() {
         .expect("git error");
     assert!(git_diff.status.success());
     let touched_files = String::from_utf8(git_diff.stdout).expect("Invalid utf8");
-    check(&touched_files).expect("check failed");
+    let (atts, builder_keys) = check(&touched_files).expect("ci check failed");
+    check_attestations(atts, builder_keys).expect("ci check failed");
 }
 
 #[test]
