@@ -7,7 +7,14 @@ fn check_attestations(atts: Vec<&str>, mut keys: HashSet<&str>) -> Result<(), St
         let builder_key = format!("builder-keys/{builder}.gpg");
         keys.remove(&builder_key as &str);
         let builder_key_file = std::fs::File::open(&builder_key)
-            .map_err(|e| format!("Builder key not found for attestation. Attestation: '{att}', Key: '{builder_key}', Error: '{e}'"))?;
+            .map_err(|e| format!("Builder key not found for attestation. Attestation: '{att}', Key: '{builder_key}', Error: '{e}'.\nHelp: Run 'gpg --export --armor {builder} > {builder_key} && git add {builder_key}'"))?;
+        for file in [&builder_key, att, &format!("{att}.asc")] {
+            let content = std::fs::read_to_string(file).unwrap();
+            if !content.chars().all(|c| c.is_ascii()) {
+                return Err(format!("All files must be in ascii format. Make sure to pass --armor to gpg. File: {file}"));
+            }
+        }
+
         let import_result = ctx
             .import(builder_key_file)
             .map_err(|e| format!("Builder key not imported. Key: '{builder_key}', Error: '{e}'"))?;
