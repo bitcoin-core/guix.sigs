@@ -104,8 +104,8 @@ fn main() {
         .expect("git error");
     assert!(git_diff.status.success());
     let touched_files = String::from_utf8(git_diff.stdout).expect("Invalid utf8");
-    let (atts, builder_keys) = check(&touched_files).expect("ci check failed");
-    check_attestations(atts, builder_keys).expect("ci check failed");
+    let (atts, builder_keys) = check(&touched_files).unwrap_or_else(|e| panic!("ci check failed:\n\n{e}\n\n"));
+    check_attestations(atts, builder_keys).unwrap_or_else(|e| panic!("ci check failed:\n\n{e}\n\n"));
 }
 
 #[test]
