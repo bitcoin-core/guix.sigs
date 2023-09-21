@@ -3,8 +3,9 @@ container:
   cpu: 1
   memory: 1G
 lint_task:
-  use_compute_credits: true
-  only_if: $CIRRUS_BASE_BRANCH == 'main'
+  use_compute_credits: $CIRRUS_REPO_OWNER == 'bitcoin-core'  # https://cirrus-ci.org/pricing/#compute-credits
+  # https://cirrus-ci.org/guide/writing-tasks/#conditional-task-execution: Skip needless compute on non-pulls
+  skip: $CIRRUS_PR == ""
   stateful: false  # https://cirrus-ci.org/guide/writing-tasks/#stateful-tasks
   setup_script: apt-get update && apt-get install -y git libgpgme-dev
   merge_base_script:
