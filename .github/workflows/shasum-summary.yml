@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: ${{ github.event.pull_request.commits }} 
+          fetch-depth: 0
       - name: show changed files
         run: git diff --no-commit-id --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
       - name: run shasum-summary
