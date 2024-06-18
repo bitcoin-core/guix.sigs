@@ -12,12 +12,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
       - name: show changed files
         run: |
-          git diff --no-commit-id --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+          git diff --no-commit-id --name-only ${{ github.event.pull_request.base.sha }}..HEAD
       - name: run shasum-summary
-        run: python3 contrib/shasum-summary/main.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > comment
+        run: python3 contrib/shasum-summary/main.py ${{ github.event.pull_request.base.sha }}..HEAD > comment
       - name: show comment
         run: cat comment
       - name: Store issue number
