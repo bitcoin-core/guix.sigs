@@ -2,7 +2,7 @@
 f9d723aec022b9a857f27a76fc3500f8d82ce02ca496e0d907c07081437204c8  bitcoin-26.2-aarch64-linux-gnu.tar.gz
 b5bc5a35e3bef4ee2633563df57e38b83cd1103f259a7844dc7e283049986fb0  bitcoin-26.2-arm-linux-gnueabihf-debug.tar.gz
 4b767fe48867825b9e1efa8ef16570410adeb099869103eaec99b664708118d6  bitcoin-26.2-arm-linux-gnueabihf.tar.gz
-3eb2139ce2e921e97aad58ba395a856e712583abd1346a8ecb3b9462f43aee46  bitcoin-26.2-arm64-apple-darwin.zip
+d3f8f9a8da2ff6c0f7d29646c23c0028c6042bbcda35c28830ce6511c840d9c0  bitcoin-26.2-arm64-apple-darwin.zip
 0d104144ee3888fbf4ac0cb01c087966625025a70394852a9db33425debce4e9  bitcoin-26.2-arm64-apple-darwin-unsigned.tar.gz
 edd5e07d0b99a05d88b79f6f19e8619a24a27e27225232f3b904db567644a7d5  bitcoin-26.2-arm64-apple-darwin-unsigned.zip
 863960b4f78130ebb9a5e7f68e5cc021778892ff9b3f8b060056c485470640d5  bitcoin-26.2-arm64-apple-darwin.tar.gz
@@ -14,7 +14,7 @@ a4cebb8873f05609b10763c35a32da8f798db55676c669e3d64249fecc7f1409  bitcoin-26.2-p
 0344a286b16c117d486dcd2e721a055072b77bab7cfa542ab6c22268591de1f6  bitcoin-26.2-powerpc64le-linux-gnu.tar.gz
 bf12bcc0aeae60abf51841a14b67c48fdca5ee8e276d1bd72a76867e5825cc45  bitcoin-26.2-riscv64-linux-gnu-debug.tar.gz
 60bf104a6467d105439507526be0ebee47cc0436a831562a4253e4e113af3a21  bitcoin-26.2-riscv64-linux-gnu.tar.gz
-a7eb600db89e97cd2e10ed86b1073077639c97deed7635ba33d325030e8eeefb  bitcoin-26.2-x86_64-apple-darwin.zip
+dd83901d294e7d9de150a85cffd1aadb2d674c15e8b23473e8d3770e21df5ef5  bitcoin-26.2-x86_64-apple-darwin.zip
 f238818530a9c0cbc1ad6d5ece3099a3eb324a407b4742ab9baf127e084e1774  bitcoin-26.2-x86_64-apple-darwin-unsigned.tar.gz
 a6efec89816073246d40b29b5bb4ec3426f624c7e1a16252cba3f60ca8cac896  bitcoin-26.2-x86_64-apple-darwin-unsigned.zip
 8a15491cb1ea1a11c667b31606563e3a325e0ae1ff250e86a8453630f3c966f1  bitcoin-26.2-x86_64-apple-darwin.tar.gz
