@@ -7,7 +7,7 @@ d7dd28579cee926e45d8e3ddb8122c430ae70564317db7ba5d8309cbe7a04532  bitcoin-29.0rc
 62541017a856595b0ed80ffb809ffc684b5d19c578def60038f6a89711fa41ac  bitcoin-29.0rc2-arm64-apple-darwin-codesigning.tar.gz
 b7de7deff5ab7920c37578db68bad1d9b4f4417ab2e60f1afb93ab0eb2c1672e  bitcoin-29.0rc2-arm64-apple-darwin-unsigned.tar.gz
 163c47bbda8385825d6149467b7f2f063d6afc14c8de124d990923e4d447302d  bitcoin-29.0rc2-arm64-apple-darwin-unsigned.zip
-06fdb8e3bf1297216a67f71d32c78e98ebeaf6629f9b51dd43237016a2d3b72a  bitcoin-29.0rc2-codesignatures-1b81b51f2806.tar.gz
+06fdb8e3bf1297216a67f71d32c78e98ebeaf6629f9b51dd43237016a2d3b72a  bitcoin-29.0rc2-codesignatures-29.0rc2.tar.gz
 a18170e094b5176f87cfbae96a1c5fa6266289e63340f99da7a11e7f336a9b9a  bitcoin-29.0rc2.tar.gz
 e7fdb8cd03221f5cb09d8621881e978262448a4e46728084144b8ab7c7379222  bitcoin-29.0rc2-powerpc64-linux-gnu-debug.tar.gz
 11ad7f7f3bc8fd75ee9c2e456aabf0dae0f5e02c07ba85ec62865ab62fc9fad0  bitcoin-29.0rc2-powerpc64-linux-gnu.tar.gz
