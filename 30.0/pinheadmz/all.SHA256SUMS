@@ -7,8 +7,7 @@ f6e2d885027e25500c8b16406c95b0fb7e536a4e2bbaae2cf8b48a476a60abe1  bitcoin-30.0-a
 60fcd271f902c1dab821148b46342695cc1ee10366211ccd3ffb844256e4cd2f  bitcoin-30.0-arm64-apple-darwin-codesigning.tar.gz
 11b8e7acc678eb372bf5f8a8a6ff4705cb3572e573218a1e6833c3abfa2268db  bitcoin-30.0-arm64-apple-darwin-unsigned.tar.gz
 01c612aee1faa59bf6234aca112097d5799220ba05a020cf997d9993e85aa8ee  bitcoin-30.0-arm64-apple-darwin-unsigned.zip
-b5b2aca2252be9dbea0d5e968b0d404bf49d3e80abadb22707274d9155dcd982  bitcoin-30.0-codesignatures-067a52278971.tar.gz
-38da8058a2d674f3ed402721178d6e52b1adb9f0a7a9686aaad0c99157ab0512  bitcoin-30.0-codesignatures-7786c32c8849.tar.gz
+38da8058a2d674f3ed402721178d6e52b1adb9f0a7a9686aaad0c99157ab0512  bitcoin-30.0-codesignatures-30.0.tar.gz
 9b472a4d51dfed9aa9d0ded2cb8c7bcb9267f8439a23a98f36eb509c1a5e6974  bitcoin-30.0.tar.gz
 d5ea7f1a20da39cec29bc9d8242b835bf0e0bcece2240b986507a9b61ba23501  bitcoin-30.0-powerpc64-linux-gnu-debug.tar.gz
 1402808855de1349a4abfdcd4295dd3e793359ceb10b39673542730e353fce63  bitcoin-30.0-powerpc64-linux-gnu.tar.gz
