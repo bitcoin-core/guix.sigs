@@ -1,5 +1,5 @@
 container:
-  image: ubuntu:jammy
+  image: ubuntu:24.04
   cpu: 1
   memory: 1G
 lint_task:
