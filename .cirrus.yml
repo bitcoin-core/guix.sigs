@@ -1,5 +1,5 @@
 container:
-  image: ubuntu:jammy
+  image: ubuntu:24.04
   cpu: 1
   memory: 1G
 lint_task:
@@ -17,7 +17,7 @@ lint_task:
     fingerprint_script: git log -1 -- ./contrib/touched-files-check/ .cirrus.yml
     populate_script:
       - mkdir out-dir
-      - apt-get install -y cargo
+      - apt-get install -y cargo pkgconf
       - cd ./contrib/touched-files-check
       - cargo build
       - mv ./target/debug/touched-files-check ./../../out-dir/
