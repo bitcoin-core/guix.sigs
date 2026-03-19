@@ -53,6 +53,11 @@ def read_files(changed_files):
 
                     hashsum, artifact = line.strip().split("  ")
                     data[release][filename][user][artifact] = hashsum
+
+                    # Lint
+                    assert release in artifact, f"{filename}: {artifact} does not contain release version {release}"
+                    if "codesignatures" in artifact:
+                        assert f"codesignatures-{release}" in artifact, f"{filename}: {artifact} signatures attached from incorrect tag"
     return data
 
 
