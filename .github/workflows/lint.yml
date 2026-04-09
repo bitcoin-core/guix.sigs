@@ -1,0 +1,26 @@
+name: Lint
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  touched-files-check:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - name: install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends cargo libgpgme-dev pkgconf
+
+      - name: build touched-files-check
+        working-directory: contrib/touched-files-check
+        run: cargo build
+
+      - name: run touched-files-check
+        run: ./contrib/touched-files-check/target/debug/touched-files-check "HEAD~..HEAD"
