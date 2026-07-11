@@ -1,0 +1,17 @@
+b4bc13e430291b2589d8fc6be713b756d343f39b2e79cadc9a2f1a55bcf83335  bitcoin-29.4-aarch64-linux-gnu-debug.tar.gz
+bc5353b3cda4a32c4ab7e46feed7fdb6ad68f23430743fee2e1fe0718df78db9  bitcoin-29.4-aarch64-linux-gnu.tar.gz
+910cca38ed27f155e79871b655456846afb723614a12511c840fac7bbbb03c1e  bitcoin-29.4-arm-linux-gnueabihf-debug.tar.gz
+367e5a126889ead53b645eb60c8417d0ea119f6459f4967e04d58c4bf7314815  bitcoin-29.4-arm-linux-gnueabihf.tar.gz
+50e825c24316f7f8d24bfc953fbe95c16a14b56f2adee7e7728e35aeab094f3a  bitcoin-29.4.tar.gz
+f5a4c1aff15aca2a0f8b78b67d729e5f9fddeaa7b6239d546a1f5e5872e131a5  bitcoin-29.4-powerpc64-linux-gnu-debug.tar.gz
+b50698d4a0fe16d559faed16e9bbab8f908f9679fcb7e9940b295a13ed23c56b  bitcoin-29.4-powerpc64-linux-gnu.tar.gz
+f6cc8d4e9cdb571ce67eaddeea4d0828de234ef0fce0f0a0934ea4ba0c62ba5d  bitcoin-29.4-powerpc64le-linux-gnu-debug.tar.gz
+f06cf5aff746044a86c197118592dcc609fc28ffa1151d7b99d093e5b929fbf1  bitcoin-29.4-powerpc64le-linux-gnu.tar.gz
+91cc04b793b08cade10223f39d362a481b12e081f6a2c78605f757d4079c8338  bitcoin-29.4-riscv64-linux-gnu-debug.tar.gz
+8e2953b3fb8cf38fd4c9b3a90b824720a81b87693b20b26b2474952929a9287d  bitcoin-29.4-riscv64-linux-gnu.tar.gz
+0216300f99d89a1694130798957107b99b380cd0bad91887c0259acc13e52491  bitcoin-29.4-x86_64-linux-gnu-debug.tar.gz
+e15bff6f6d21a315c4af25d2e8ae933a22bd51e924e0e90ab0474e1e11516331  bitcoin-29.4-x86_64-linux-gnu.tar.gz
+7f03cd7edf0c8429ca73159aeed9f76046eb906dbef2d99b067f7185ce995270  bitcoin-29.4-win64-codesigning.tar.gz
+d44961deec3f0779e880eafa6e3fb72d88e2f615560353e304bf82de6f2c3e76  bitcoin-29.4-win64-debug.zip
+89f0a0cb1af1ba5bc8af636a8256f4461973f377d2a8a4e954942977ed9897ac  bitcoin-29.4-win64-setup-unsigned.exe
+a6c3e62794a11d432dd25510c5b48beda1f209ae5ea5ca45958a7e3b41ae86db  bitcoin-29.4-win64-unsigned.zip
