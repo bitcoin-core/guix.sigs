@@ -2,6 +2,8 @@ import glob
 import string
 import argparse
 import subprocess
+import os
+import re
 
 USERNAME_ALPHABET = list(string.ascii_letters)
 SYMBOLS = ["◆", "▞", "▄", "▀", "▌", "▐", "▚"]
@@ -34,32 +36,82 @@ def changed_files(diffrange):
     return changed_files
 
 
-def read_files(changed_files):
+def read_files(changed_files, snapshot=None):
+    """Summarize manifests from a trusted checkout or a pinned Git tree.
+
+    A privileged workflow must never check out or execute the untrusted PR.
+    In snapshot mode we read regular file blobs directly from Git objects:
+    symlinks in a PR therefore cannot read files from the runner.
+    """
+    snapshot_files = None
+    if snapshot is not None:
+        if not re.fullmatch(r"[0-9a-f]{40}", snapshot):
+            raise ValueError("snapshot must be an immutable Git commit SHA")
+        result = subprocess.run(
+            ["git", "ls-tree", "-r", "-z", snapshot],
+            capture_output=True, check=True,
+        )
+        snapshot_files = []
+        for entry in result.stdout.split(b"\x00"):
+            if not entry:
+                continue
+            metadata, raw_path = entry.split(b"\t", 1)
+            mode, kind, _ = metadata.decode("ascii").split(" ")
+            if kind == "blob" and mode in {"100644", "100755"}:
+                snapshot_files.append(os.fsdecode(raw_path))
+
     data = dict()
     for release, filename in changed_files:
-        if release not in data:
-            data[release] = {}
-        files = glob.glob(f"{release}/*/{filename}")
+        if snapshot_files is None:
+            files = glob.glob(f"{release}/*/{filename}")
+        else:
+            # These are the only released manifest formats we summarize.
+            if not re.fullmatch(r"[0-9][0-9A-Za-z.+-]*", release):
+                raise ValueError("unexpected release name")
+            if filename not in {"all.SHA256SUMS", "noncodesigned.SHA256SUMS"}:
+                continue
+            files = [
+                path for path in snapshot_files
+                if len(path.split("/")) == 3
+                and path.split("/")[0] == release
+                and path.split("/")[2] == filename
+            ]
+
         for file in files:
             user = file.split("/")[1]
-            with open(file) as f:
-                if filename not in data[release]:
-                    data[release][filename] = {}
-                data[release][filename][user] = {}
+            if snapshot_files is None:
+                with open(file) as f:
+                    lines = f.readlines()
+            else:
+                if not re.fullmatch(r"[A-Za-z0-9_.-]+", user):
+                    raise ValueError("unexpected builder name")
+                result = subprocess.run(
+                    ["git", "cat-file", "blob", f"{snapshot}:{file}"],
+                    capture_output=True, check=True,
+                )
+                if len(result.stdout) > 256_000:
+                    raise ValueError("SHA256SUMS manifest too large")
+                lines = result.stdout.decode("utf-8").splitlines()
 
-                for line in f.readlines():
-                    if len(line.strip()) == 0:
-                        continue
+            data.setdefault(release, {}).setdefault(filename, {})[user] = {}
+            for line in lines:
+                if not line.strip():
+                    continue
+                hashsum, artifact = line.strip().split("  ")
+                if snapshot_files is not None:
+                    # Bot comments are Markdown. Never let PR-controlled names
+                    # inject formatting, mentions, links or executable HTML.
+                    if not re.fullmatch(r"[a-fA-F0-9]{64}", hashsum):
+                        raise ValueError("invalid manifest hash")
+                    if not re.fullmatch(r"[A-Za-z0-9._+-]+", artifact):
+                        raise ValueError("unsafe manifest artifact name")
+                data[release][filename][user][artifact] = hashsum
 
-                    hashsum, artifact = line.strip().split("  ")
-                    data[release][filename][user][artifact] = hashsum
-
-                    # Lint
-                    assert release in artifact, f"{filename}: {artifact} does not contain release version {release}"
-                    if "codesignatures" in artifact:
-                        assert f"codesignatures-{release}" in artifact, f"{filename}: {artifact} signatures attached from incorrect tag"
+                # Lint
+                assert release in artifact, f"{filename}: {artifact} does not contain release version {release}"
+                if "codesignatures" in artifact:
+                    assert f"codesignatures-{release}" in artifact, f"{filename}: {artifact} signatures attached from incorrect tag"
     return data
-
 
 def hash_to_symbol(hash, hashes):
     # all hashes match
@@ -130,10 +182,16 @@ def main():
         type=str,
         help="Only look at added or changed files in the diff-range",
     )
+    parser.add_argument(
+        "--snapshot",
+        type=str,
+        default=None,
+        help="Read manifest blobs from this pinned Git commit, without checking out PR code",
+    )
     args = parser.parse_args()
 
     changed_shasum_files = changed_files(args.diffrange)
-    data = read_files(changed_shasum_files)
+    data = read_files(changed_shasum_files, snapshot=args.snapshot)
     print_summaries(data)
 
 
