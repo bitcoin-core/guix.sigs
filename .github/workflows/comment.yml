@@ -1,41 +1,89 @@
-name: Comment on PR
+name: Comment on PR with trusted SHA256 summary
 
+# We must not turn a PR-produced artifact into a privileged bot comment.
+# The code below is always read from the trusted base; the PR is read only
+# as immutable Git objects, never checked out or executed.
 on:
-  workflow_run:
-    workflows: ["SHASUM summary"]
-    types:
-      - completed
+  pull_request_target:
+    branches: ["main"]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   comment:
-    permissions:
-      pull-requests: write
     runs-on: ubuntu-slim
-    if: >
-      github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.conclusion == 'success'
+    timeout-minutes: 5
     steps:
-      - name: download artifact
-        uses: actions/download-artifact@v8
+      - name: Checkout trusted base at the event's commit
+        uses: actions/checkout@v7
         with:
-          name: shasum-comment
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.event.workflow_run.id }}
-      - name: comment
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Pin PR head as data only
+        id: target
+        shell: bash
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "refs/pull/${PR_NUMBER}/head"
+          actual="$(git rev-parse FETCH_HEAD)"
+          if [[ "$actual" != "$EXPECTED_HEAD" ]]; then
+            # A contributor force-pushed after this event was created.
+            # The synchronize event for that push will run a fresh check.
+            echo "PR head changed during fetch; not posting stale data."
+            exit 0
+          fi
+          echo "sha=$actual" >> "$GITHUB_OUTPUT"
+
+      - name: Generate summary with trusted code and pinned Git blob data
+        if: steps.target.outputs.sha != ''
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ steps.target.outputs.sha }}
+        run: |
+          set -euo pipefail
+          python3 -I contrib/shasum-summary/main.py \
+            "${BASE_SHA}..${HEAD_SHA}" --snapshot "${HEAD_SHA}" \
+            > "$RUNNER_TEMP/sha256-summary.txt"
+
+      - name: Comment on the PR identified by the trusted event
+        if: steps.target.outputs.sha != ''
         uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ steps.target.outputs.sha }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs');
-            let issue_number = Number(fs.readFileSync('./issue-number', 'utf8').trim());
-            let comment = fs.readFileSync('./comment', 'utf8').trim();
-
-            if (comment.length > 0) {
-              github.rest.issues.createComment({
-                issue_number: issue_number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: "${{ github.event.pull_request.head.sha }}\n\n" + comment
-              });
+            const fs = require("node:fs");
+            const path = require("node:path");
+            const file = path.join(process.env.RUNNER_TEMP, "sha256-summary.txt");
+            const summary = fs.readFileSync(file, "utf8").trim();
+            if (!summary) {
+              core.info("No manifest changes to summarize.");
+              return;
             }
+            // This is a comparison of PR-provided hashes, NOT verification
+            // of release signatures or a judgment that artifacts are safe.
+            const body = [
+              "Automated comparison of PR-provided SHA256SUMS data",
+              "(not a signature or release authenticity verification).",
+              "",
+              "Revision: `" + process.env.HEAD_SHA + "`",
+              "",
+              summary,
+            ].join("\n");
+            await github.rest.issues.createComment({
+              issue_number: Number(process.env.PR_NUMBER),
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
