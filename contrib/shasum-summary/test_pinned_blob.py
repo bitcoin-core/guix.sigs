@@ -110,7 +110,7 @@ class PinnedBlobTests(unittest.TestCase):
         extra_release = "32.1rc1"
         other = self.repo / extra_release / "alice" / FILENAME
         other.parent.mkdir(parents=True)
-        other.write_text(f"{HASH_A}  bitcoin-32.1rc1-x86_64.tar.gz\\n")
+        other.write_text(f"{HASH_A}  bitcoin-32.1rc1-x86_64.tar.gz\n")
         self.git("add", ".")
         self.git("commit", "-qm", "trusted base advanced on another release")
         advanced = self.git("rev-parse", "HEAD").strip()
