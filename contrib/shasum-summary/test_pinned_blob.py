@@ -104,6 +104,21 @@ class PinnedBlobTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "immutable Git commit SHA"):
             summary.read_files({(RELEASE, FILENAME)}, snapshot="pr")
 
+    def test_pr_diff_uses_merge_base_when_trusted_base_advances(self):
+        head = self.commit_pr()
+        self.git("checkout", "-q", "main")
+        extra_release = "32.1rc1"
+        other = self.repo / extra_release / "alice" / FILENAME
+        other.parent.mkdir(parents=True)
+        other.write_text(f"{HASH_A}  bitcoin-32.1rc1-x86_64.tar.gz\\n")
+        self.git("add", ".")
+        self.git("commit", "-qm", "trusted base advanced on another release")
+        advanced = self.git("rev-parse", "HEAD").strip()
+        # A two-dot diff wrongly attributes the base-only release to the PR.
+        self.assertIn((extra_release, FILENAME), summary.changed_files(f"{advanced}..{head}"))
+        # Three-dot compares the PR against the merge-base, as intended.
+        self.assertEqual(summary.changed_files(f"{advanced}...{head}"), {(RELEASE, FILENAME)})
+
     def test_legacy_read_files_remains_functional(self):
         data = summary.read_files({(RELEASE, FILENAME)})
         self.assertEqual(data[RELEASE][FILENAME]["alice"][ARTIFACT], HASH_A)
