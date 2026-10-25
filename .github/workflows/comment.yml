@@ -51,7 +51,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 -I contrib/shasum-summary/main.py \
-            "${BASE_SHA}..${HEAD_SHA}" --snapshot "${HEAD_SHA}" \
+            "${BASE_SHA}...${HEAD_SHA}" --snapshot "${HEAD_SHA}" \
             > "$RUNNER_TEMP/sha256-summary.txt"
 
       - name: Comment on the PR identified by the trusted event
